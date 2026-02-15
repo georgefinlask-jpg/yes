@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Poems</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #fff0f6;
+    color: #d6336c;
+    text-align: center;
+    padding: 40px;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease;
+  }
+
+  /* Language buttons */
+  .lang-buttons button {
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #d6336c;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .lang-buttons button:hover {
+    background: #ff3385;
+    transform: scale(1.05);
+  }
+
+  /* Poem list */
+  .poem-list {
+    max-width: 500px;
+    margin: 30px auto;
+    display: none;
+    animation: fadeIn 1s ease;
+    text-align: left;
+  }
+
+  .poem-item {
+    background: white;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+
+  .poem-title {
+    font-weight: bold;
+  }
+
+  .poem-date {
+    font-size: 0.85rem;
+    color: gray;
+  }
+
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    animation: fadeIn 0.4s ease;
+    overflow: auto;
+  }
+
+  .modal-content {
+    background: #fff0f6;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 600px;
+    position: relative;
+    animation: slideUp 0.4s ease;
+  }
+
+  .close-btn {
+    position: fixed; /* stays even when scrolling */
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #d6336c;
+    z-index: 20;
+  }
+
+  .modal h2 {
+    margin-bottom: 5px;
+  }
+
+  .modal .date {
+    font-size: 0.85rem;
+    color: gray;
+    margin-bottom: 20px;
+  }
+
+  .poem-content {
+    white-space: pre-line;
+    line-height: 1.8;
+  }
+
+  /* Done button */
+  #doneBtn {
+    display: none;
+    margin-top: 30px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #d6336c;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #doneBtn:hover {
+    background: #ff3385;
+    transform: scale(1.05);
+  }
+
+  /* Floating background */
+  .floating-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .floating-bg div {
+    position: absolute;
+    opacity: 0.15;
+    animation: floatUp 15s linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    10% { opacity: 0.15; }
+    100% { transform: translateY(-20vh); opacity: 0; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); }
+    to { transform: translateY(0); }
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="floating-bg" id="floatingBg"></div>
+
+<h1>📖 Poems ✨</h1>
+
+<div class="lang-buttons">
+  <button onclick="showEnglish()">English 🇬🇧</button>
+  <button onclick="showTagalog()">Tagalog 🇵🇭</button>
+</div>
+
+<div id="englishPoems" class="poem-list"></div>
+<div id="tagalogPoems" class="poem-list"></div>
+
+<!-- MODAL -->
+<div id="poemModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">✕</span>
+    <h2 id="modalTitle"></h2>
+    <div class="date" id="modalDate"></div>
+    <div class="poem-content" id="modalContent"></div>
+  </div>
+</div>
+
+<button id="doneBtn" onclick="window.location.href='ending.html'">Done Viewing Everything 💗</button>
+
+<script>
+const english = [
+  { title: "Home in Your Smile", date: "July 19, 2025", content: `Your poem content here...` },
+  { title: "Seven Months With You", date: "July 27, 2025", content: `Your poem content here...` },
+  { title: "For All You Are", date: "July 29, 2025", content: `Your poem content here...` },
+  { title: "Only You, Always", date: "August 4, 2025", content: `Your poem content here...` }
+];
+
+const tagalog = [
+  { title: "Sa Gitna ng Ulan", date: "January 10, 2026", content: `Tagalog poem content here...` }
+];
+
+let viewedPoems = new Set();
+
+function showEnglish() {
+  viewedPoems.clear();
+  document.getElementById("doneBtn").style.display = "none";
+  renderPoems(english, "englishPoems");
+  document.getElementById("tagalogPoems").style.display = "none";
+}
+
+function showTagalog() {
+  viewedPoems.clear();
+  document.getElementById("doneBtn").style.display = "none";
+  renderPoems(tagalog, "tagalogPoems");
+  document.getElementById("englishPoems").style.display = "none";
+}
+
+function renderPoems(list, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  container.style.display = "block";
+
+  list.forEach(poem => {
+    const div = document.createElement("div");
+    div.className = "poem-item";
+    div.innerHTML = `
+      <div class="poem-title">${poem.title}</div>
+      <div class="poem-date">${poem.date}</div>
+    `;
+    div.onclick = () => openModal(poem);
+    container.appendChild(div);
+  });
+}
+
+function openModal(poem) {
+  document.getElementById("modalTitle").innerText = poem.title;
+  document.getElementById("modalDate").innerText = poem.date;
+  document.getElementById("modalContent").innerText = poem.content;
+  document.getElementById("poemModal").style.display = "block";
+  document.body.style.overflow = "hidden";
+
+  viewedPoems.add(poem.title);
+  checkAllViewed();
+}
+
+function closeModal() {
+  document.getElementById("poemModal").style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+function checkAllViewed() {
+  let currentList = (document.getElementById("englishPoems").style.display === "block") ? english : tagalog;
+  if (viewedPoems.size >= currentList.length) {
+    document.getElementById("doneBtn").style.display = "block";
+  }
+}
+
+/* Floating emojis */
+const floatingBg = document.getElementById("floatingBg");
+const emojis = ["📖","✨","💗","🌸","Ilysm","mwa"];
+
+function createFloating() {
+  const el = document.createElement("div");
+  el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.fontSize = (18 + Math.random() * 20) + "px";
+  el.style.animationDuration = (12 + Math.random() * 10) + "s";
+  floatingBg.appendChild(el);
+  setTimeout(() => el.remove(), 20000);
+}
+
+setInterval(createFloating, 900);
+
+</script>
+</body>
+</html>
