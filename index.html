@@ -213,9 +213,34 @@
     // ===== Done Reading Button =====
     const doneBtn = document.getElementById("doneReading");
     doneBtn.onclick = () => {
-      // Scroll smoothly to bottom
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    };
+  // Optional: mini confetti
+  for (let i = 0; i < 30; i++) {
+    const conf = document.createElement('div');
+    conf.textContent = ["💖","💗","❤️","😻","Ilysm","mwa"][Math.floor(Math.random()*6)];
+    conf.style.position = 'fixed';
+    conf.style.left = Math.random() * window.innerWidth + 'px';
+    conf.style.top = window.innerHeight + 'px';
+    conf.style.fontSize = (15 + Math.random()*25) + 'px';
+    conf.style.opacity = 0.9;
+    conf.style.zIndex = 9999;
+    conf.style.pointerEvents = 'none';
+    document.body.appendChild(conf);
+
+    const duration = 1200 + Math.random()*400;
+    conf.animate([
+      { transform: `translateY(0px) rotate(0deg)`, opacity: 1 },
+      { transform: `translateY(-150px) rotate(${Math.random()*360}deg)`, opacity: 0 }
+    ], { duration: duration, easing: 'ease-out' });
+
+    setTimeout(() => conf.remove(), duration);
+  }
+
+  // Go to poems.html after confetti
+  setTimeout(() => {
+    window.location.href = 'poems.html'; // make sure poems.html is in the same folder
+  }, 1200);
+};
+
 
     // ===== Floating Emojis & Words =====
     const floatingBg = document.getElementById("floatingBg");
