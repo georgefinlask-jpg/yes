@@ -89,14 +89,15 @@
   }
 
   .close-btn {
-    position: fixed; 
-    top: 15px;
-    right: 20px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #d6336c;
-    z-index: 20;
-  }
+  position: absolute; /* relative to modal-content */
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #d6336c;
+  z-index: 10;
+}
+
 
   .modal h2 {
     margin-bottom: 5px;
