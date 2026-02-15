@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Ending 💗</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #fff0f6;
+    color: #d6336c;
+    text-align: center;
+    padding: 60px 30px;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease;
+  }
+
+  .message {
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.9;
+    font-size: 1.15rem;
+    animation: fadeIn 2.5s ease;
+  }
+
+  .heart {
+    font-size: 2rem;
+    margin-top: 30px;
+    animation: fadeIn 3s ease;
+  }
+
+  .back-btn {
+    margin-top: 40px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #d6336c;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .back-btn:hover {
+    background: #ff3385;
+    transform: scale(1.05);
+  }
+
+  /* Floating background */
+  .floating-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .floating-bg div {
+    position: absolute;
+    opacity: 0.12;
+    animation: floatUp 18s linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    10% { opacity: 0.12; }
+    100% { transform: translateY(-20vh); opacity: 0; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="floating-bg" id="floatingBg"></div>
+
+<h1>💌 The End… or Maybe Just the Beginning</h1>
+
+<div class="message">
+Halloww bebiiiiii ヾ(≧▽≦*)o, I just want to start by saying thank you so much for taking the time to check this out. It really means the world sako na you care enough to be here. I know life can get hectic, and yet you still make the effort, and that’s something I truly treasure. Every little thing you do reminds me of how lucky I am to have you. Honestly, your presence alone makes everything feel lighter and brighter :D.
+
+I want you to know how much I appreciate the way you listen, even when I ramble or overthink. You always make me feel heard, seen, and understood. The way you respond, with patience and kindness, makes my heart melt every time. It feels like everything becomes better and more meaningful when you’re around. I don’t take any of it for granted, and I hope you can feel how much it matters to me.
+
+I love how you bring joy into my life in the simplest ways, Sam. Whether it’s a funny joke, a sweet message, or just being your amazing self, it always lights me up :3. Your energy is contagious, and it makes even the dullest days feel alive. You make me want to be a better version of myself without even trying. That kind of love and inspiration is something I’ll NEVER stop cherishing.
+
+I also want to say thank you for believing in me, even when I doubt myself. Your encouragement lifts me up in ways I can’t even fully express. Knowing you’re in my corner gives me strength to keep going, no matter what :>. It’s not just support; it’s love, genuine and unwavering. And trust me, I notice every little thing, and it warms my soul every single time.
+
+Your thoughtfulness never goes unnoticed. The way you remember small details, celebrate my little wins, or just check in on me, it all makes me feel sooo valued. I hope you realize that the love you give comes back tenfold in how deeply it touches me. Every smile you spark in me, every laugh we share, it’s all a beautiful gift. You make life feel full, like the kind of fullness that sticks with you forever :3.
+
+I want you to know that I love you not just for what you do, but for who you are. Your heart, your soul, your quirks, they all make you irreplaceable to me. You’ve carved a permanent space in my life, one that’s filled with trust, joy, and warmth. I can’t imagine my days without your care, your voice, your energy. You are, simply put, my favorite part of everything.
+
+Even on tough days, just knowing you’re there makes all the difference. You have this incredible way of making challenges feel lighter and fears feel smaller. I can’t tell you enough how much that comfort means to me. You’re my safe space, my happi place, aking tahanan, my always, and my biggest cheerleader all rolled into one. I’m endlessly grateful for that, and I hope you feel how deeply it touches my heart.
+
+So thank you, bebiii, for being you; so kind, so loving, so endlessly amazing. Thank you for every message, every hug, every conversation, every moment you’ve shared with me. I love you more than words can capture, more than I could ever put into a simple note. You make my world brighter, my heart fuller, and my life infinitely sweeter. I just want you to know that, always, I’m here, loving you endlessly 💞, Mwaaa.
+</div>
+
+<div class="heart">💗🐱✨</div>
+
+<button class="back-btn" onclick="window.location.href='index.html'">
+  Back to Start
+</button>
+
+<script>
+// Floating background emojis
+const floatingBg = document.getElementById("floatingBg");
+const emojis = ["💗","✨","🐱","🌸","💌"];
+
+function createFloating() {
+  const el = document.createElement("div");
+  el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.fontSize = (20 + Math.random() * 20) + "px";
+  el.style.animationDuration = (15 + Math.random() * 10) + "s";
+  floatingBg.appendChild(el);
+  setTimeout(() => el.remove(), 25000);
+}
+
+setInterval(createFloating, 1200);
+
+// Mini confetti on page load
+function triggerConfetti() {
+  for (let i = 0; i < 60; i++) {
+    const conf = document.createElement('div');
+    conf.textContent = ["💗","✨","🐱","🌸","💌"][Math.floor(Math.random()*5)];
+    conf.style.position = 'fixed';
+    conf.style.left = Math.random() * window.innerWidth + 'px';
+    conf.style.top = window.innerHeight + 'px';
+    conf.style.fontSize = (15 + Math.random()*25) + 'px';
+    conf.style.opacity = 0.9;
+    conf.style.zIndex = 9999;
+    conf.style.pointerEvents = 'none';
+    document.body.appendChild(conf);
+
+    const duration = 1500 + Math.random()*800;
+    conf.animate([
+      { transform: `translateY(0px) rotate(0deg)`, opacity: 1 },
+      { transform: `translateY(-150px) rotate(${Math.random()*360}deg)`, opacity: 0 }
+    ], { duration: duration, easing: 'ease-out' });
+
+    setTimeout(() => conf.remove(), duration);
+  }
+}
+
+// Trigger confetti on page load
+window.onload = triggerConfetti;
+</script>
+
+</body>
+</html>
