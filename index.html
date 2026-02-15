@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Things I Love About You 💖</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffe6f0;
+      color: #d6336c;
+      margin: 0;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px #ff99c8;
+    }
+
+    #reasons-container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff0f6;
+      border-radius: 15px;
+      padding: 20px;
+      border: 2px solid #ff99c8;
+      max-height: 60vh;
+      overflow-y: auto;
+      box-shadow: 2px 2px 10px rgba(214, 51, 108, 0.2);
+      margin-bottom: 20px;
+    }
+
+    #reasons-container p {
+      margin-bottom: 10px;
+    }
+
+    button#doneReading {
+      display: block;
+      margin: 30px auto;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      background-color: #d6336c;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    button#doneReading:hover {
+      transform: scale(1.1);
+      background-color: #ff3385;
+    }
+
+    /* Floating background */
+    .floating-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-bg div {
+      position: absolute;
+      white-space: nowrap;
+      opacity: 0.15;
+      font-weight: bold;
+      animation-name: floatUpFade;
+      animation-timing-function: linear;
+      pointer-events: none;
+    }
+
+    @keyframes floatUpFade {
+      0% { transform: translateY(100vh); opacity: 0; }
+      10% { opacity: 0.15; }
+      100% { transform: translateY(-20vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-bg" id="floatingBg"></div>
+
+  <h1>Things I Love About <span>You ❤️</span></h1>
+
+  <div id="reasons-container">
+    <!-- Reasons will be inserted here -->
+  </div>
+
+  <button id="doneReading">Done Reading 💌</button>
+
+  <script>
+    // ===== Reasons Array =====
+    const reasons = [
+"I love your smile and how it brightens my dayyy.",
+"I love the way you make me laugh even when I'm sad. 😛",
+"I love your honesty and how I can always trust you.",
+"I love how you listen and make me feel heard.",
+"I love your sense of humor and how it lightens any mood.",
+"I love your hugs and how safe they make me feel.",
+"I love your determination and how you chase your dreams.",
+"I love the little things you do that show you care.",
+"I love how you always support me in everything I do.",
+"I love your passion for the things you love.",
+"I love the way your eyes sparkle when you're happy.",
+"I love how thoughtful you are in little surprises.",
+"I love your confidence and how it inspires me.",
+"I love your creativity and how you always come up with fun ideas.",
+"I love your voice and how it comforts me when I hear it.",
+"I love your kindness.",
+"I love your patience and understanding when things go wrong.",
+"I love how you listen to me without judging.",
+"I love how you smile and it lights up my whole day.",
+"I love how you remember the little things that matter to me.",
+"I love how you make me feel safe and loved.",
+"I love being loved by you.",
+"I love how you motivate me.",
+"I love how you are patient with me, even when I’m difficult.",
+"I love how you say my name like it’s the most beautiful word. Yie hahaawdawuf.",
+"I love how you show kindness to everyone around you.",
+"I love how you hold my hand like we belong together.",
+"I love how you surprise me with thoughtful gestures.",
+"I love how you care so deeply about the people you love.",
+"I love how you make ordinary moments feel extraordinary. :D",
+"I love how you are passionate about the things that matter to you.",
+"I love how you look at me like I’m your whole world DHAUODHAFAWDU.",
+"I love how you hug me like nothing else matters, I feel so safe and relaxed jud.",
+"I love how you accept me with all my flaws.",
+"I love how you say “I love you” in your own unique way.",
+"I love how you always know how to make me smile.",
+"I love how sometimes you make time for me even when you’re busy.",
+"I love how you’re always honest with me.",
+"I love how you want and have the will to improve",
+"I love your efforts.",
+"I love how you remember little details about my day.",
+"I love how you compliment me in ways that make me feel special.",
+"I love how you hold me close when I’m feeling down.",
+"I love how you make me feel pretty without trying.",
+"I love how you are loyal to the people you care about.",
+"I love how you surprise me with little acts of love.",
+"I love how you make me feel like I belong. In short, I belong with you ehe :3",
+"I love how you share your thoughts and feelings with me.",
+"I love how you have plans/thoughts for our future together.",
+"I love how you’re thoughtful even in small ways.",
+"I love how you respect my opinions.",
+"I just love youuuuuuuuuuuu sooooooooo muchhhhhhhhhh bebiiiiiiiiiii",
+"I love how you always try to understand me.",
+"I love how you make me feel like the luckiest person alive.",
+"I love how you take care of me when I’m sick.",
+"I love how you notice when something’s wrong with me.",
+"I love how you make me feel appreciated.",
+"I love how you never give up on us.",
+"I love how you are genuine and real.",
+"I love how you respect my space but still stay close.",
+"I love how you are protective without being controlling.",
+"I love how you celebrate my little achievements.",
+"I love how you love me for who I truly am.",
+"I love how you make me feel comfortable being myself.",
+"I love how you make me feel valued and important.",
+"I love how you smile when you see me.",
+"I love how you hold me.",
+"I love how you make me feel safe to be vulnerable.",
+"I love how you remember special moments.",
+"I love how you encourage me to love myself more.",
+"I love how you think of me even when we’re apart.",
+"I love how you are my comfort and my home.",
+"I love how you make me feel like I matter.",
+"I love how you share your dreams with me.",
+"I love how you are dependable and reliable.",
+"I love how you encourage me to try new things.",
+"I love how you make me feel loved EVERY single day.",
+"I love how you can make me feel special with just a look.",
+"I love how you respect my feelings.",
+"I love how you make every day better.",
+"I love how you are patient when I take time to open up.",
+"I love how you love me unconditionally.",
+"I love how you make me feel like I’m enough.",
+"I love how you are understanding when I’m emotional.",
+"I love how you always have my back.",
+"I love how you make me feel calm when I’m anxious.",
+"I love how you show love in your own unique way.",
+"I love how you are proud of me and my achievements.",
+"I love how you make me feel like we’re a team.",
+"I love love loveee how you hold me close without saying a word.",
+"I love how you respect my quirks and differences.",
+"I love how you are my safe space.",
+"I love how you make me feel understood.",
+"I love how you make life feel easier just by being with me.",
+"I love how you make me feel cherished.",
+"I love how you love me even when I don’t love myself.",
+"I love how you make me feel like I belong with you.",
+"I love how you make me blush or kilig awdhauhfja.",
+"I love how you always check on me.",
+"I love you because you are YOU, and that’s enough."
+];
+
+    const container = document.getElementById("reasons-container");
+    reasons.forEach((reason, i) => {
+      const p = document.createElement("p");
+      p.innerHTML = `${i+1}. ${reason.replace(/you/gi, "<strong>you</strong>")}`;
+      container.appendChild(p);
+    });
+
+    // ===== Done Reading Button =====
+    const doneBtn = document.getElementById("doneReading");
+    doneBtn.onclick = () => {
+      // Scroll smoothly to bottom
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    };
+
+    // ===== Floating Emojis & Words =====
+    const floatingBg = document.getElementById("floatingBg");
+    const floatItems = ["🐱","❤️","😻","💖","Ilysm","mwa","💗"];
+
+    function createFloating() {
+      const el = document.createElement("div");
+      el.textContent = floatItems[Math.floor(Math.random() * floatItems.length)];
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.fontSize = (18 + Math.random() * 20) + "px";
+      el.style.animationDuration = (12 + Math.random() * 10) + "s";
+      floatingBg.appendChild(el);
+      setTimeout(() => el.remove(), 25000);
+    }
+
+    setInterval(createFloating, 800);
+  </script>
+</body>
+</html>
