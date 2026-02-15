@@ -89,7 +89,7 @@
   }
 
   .close-btn {
-    position: fixed; /* stays even when scrolling */
+    position: fixed; 
     top: 15px;
     right: 20px;
     font-size: 1.5rem;
@@ -191,7 +191,8 @@
   </div>
 </div>
 
-<button id="doneBtn" onclick="window.location.href='ending.html'">Done Viewing Everything 💗</button>
+<!-- Done button -->
+<button id="doneBtn">Done Viewing Everything 💗</button>
 
 <script>
 const english = [
@@ -277,6 +278,38 @@ function createFloating() {
 
 setInterval(createFloating, 900);
 
+/* Confetti + redirect for Done button */
+const doneBtn = document.getElementById("doneBtn");
+
+doneBtn.addEventListener('click', () => {
+  // mini confetti
+  for (let i = 0; i < 50; i++) {
+    const conf = document.createElement('div');
+    conf.textContent = ["💗","✨","🐱","🌸","💌"][Math.floor(Math.random()*5)];
+    conf.style.position = 'fixed';
+    conf.style.left = Math.random() * window.innerWidth + 'px';
+    conf.style.top = window.innerHeight + 'px';
+    conf.style.fontSize = (15 + Math.random()*25) + 'px';
+    conf.style.opacity = 0.9;
+    conf.style.zIndex = 9999;
+    conf.style.pointerEvents = 'none';
+    document.body.appendChild(conf);
+
+    const duration = 1200 + Math.random()*400;
+    conf.animate([
+      { transform: `translateY(0px) rotate(0deg)`, opacity: 1 },
+      { transform: `translateY(-150px) rotate(${Math.random()*360}deg)`, opacity: 0 }
+    ], { duration: duration, easing: 'ease-out' });
+
+    setTimeout(() => conf.remove(), duration);
+  }
+
+  // redirect after confetti
+  setTimeout(() => {
+    window.location.href = 'ending.html';
+  }, 1200);
+});
 </script>
+
 </body>
 </html>
