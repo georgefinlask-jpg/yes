@@ -211,25 +211,28 @@
     });
 
     // ===== Done Reading Button =====
-    const doneBtn = document.getElementById("doneReading");
-    doneBtn.onclick = () => {
-  // Optional: mini confetti
-  for (let i = 0; i < 30; i++) {
+   const doneBtn = document.getElementById("doneReading");
+doneBtn.onclick = () => {
+  // Confetti that floats longer and higher
+  for (let i = 0; i < 60; i++) { // more confetti
     const conf = document.createElement('div');
     conf.textContent = ["💖","💗","❤️","😻","Ilysm","mwa"][Math.floor(Math.random()*6)];
     conf.style.position = 'fixed';
     conf.style.left = Math.random() * window.innerWidth + 'px';
     conf.style.top = window.innerHeight + 'px';
-    conf.style.fontSize = (15 + Math.random()*25) + 'px';
+    conf.style.fontSize = (18 + Math.random()*30) + 'px'; // bigger sizes
     conf.style.opacity = 0.9;
     conf.style.zIndex = 9999;
     conf.style.pointerEvents = 'none';
     document.body.appendChild(conf);
 
-    const duration = 1200 + Math.random()*400;
+    const duration = 2500 + Math.random()*1000; // lasts longer
+    const rotate = Math.random()*720 - 360; // more rotation range
+    const xOffset = (Math.random()-0.5)*200; // drift left/right
+
     conf.animate([
-      { transform: `translateY(0px) rotate(0deg)`, opacity: 1 },
-      { transform: `translateY(-150px) rotate(${Math.random()*360}deg)`, opacity: 0 }
+      { transform: `translate(0px,0px) rotate(0deg)`, opacity: 1 },
+      { transform: `translate(${xOffset}px,-400px) rotate(${rotate}deg)`, opacity: 0 }
     ], { duration: duration, easing: 'ease-out' });
 
     setTimeout(() => conf.remove(), duration);
@@ -237,26 +240,6 @@
 
   // Go to poems.html after confetti
   setTimeout(() => {
-    window.location.href = 'poems.html'; // make sure poems.html is in the same folder
+    window.location.href = 'poems.html';
   }, 1200);
 };
-
-
-    // ===== Floating Emojis & Words =====
-    const floatingBg = document.getElementById("floatingBg");
-    const floatItems = ["🐱","❤️","😻","💖","Ilysm","mwa","💗"];
-
-    function createFloating() {
-      const el = document.createElement("div");
-      el.textContent = floatItems[Math.floor(Math.random() * floatItems.length)];
-      el.style.left = Math.random() * 100 + "vw";
-      el.style.fontSize = (18 + Math.random() * 20) + "px";
-      el.style.animationDuration = (12 + Math.random() * 10) + "s";
-      floatingBg.appendChild(el);
-      setTimeout(() => el.remove(), 25000);
-    }
-
-    setInterval(createFloating, 800);
-  </script>
-</body>
-</html>
